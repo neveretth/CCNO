@@ -14,7 +14,7 @@ using ITensorMPS
 
     No return value
 """
-function evolve(params::CCNO.Parameters, state::CCNO.SimulationState)
+function evolve(params::CCNO.Parameters, state::CCNO.SimulationState, x_store, y_store, z_store, zone_number)
 
     t_initial::Float64 = 0.0
     iteration::Int64 = 0
@@ -57,6 +57,18 @@ function evolve(params::CCNO.Parameters, state::CCNO.SimulationState)
             state.xyz = mod.(state.xyz, params.L)
             @assert all(state.xyz .>= 0 .&& state.xyz .<= params.L)
         end
+
+        # Store positions for later analysis
+        append!(x_store, zeros(zone_number))
+        append!(y_store, zeros(zone_number))
+        append!(z_store, zeros(zone_number))
+        for i in 1:zone_number
+            # Julia doesn't give us the tools we need, so we shoehorn them in ourselves.
+            x_store[iteration*zone_number + i] = state.xyz[i, 1]
+            y_store[iteration*zone_number + i] = state.xyz[i, 2]
+            z_store[iteration*zone_number + i] = state.xyz[i, 3]
+        end
+    
 
         sort_sites!(state)
 

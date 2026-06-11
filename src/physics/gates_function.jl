@@ -54,7 +54,7 @@ Base.@pure function create_gates(params::CCNO.Parameters, state::CCNO.Simulation
 
             # get the shape function, multiplying all three directions together
             shape_result::Float64 = 1
-            for d in 1:1
+            for d in 1:3
                 shape_result *= shape_func(params, state, d, i, j)
             end
                 
