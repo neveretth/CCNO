@@ -42,8 +42,8 @@ pipeline {
 		archiveArtifacts artifacts: '*.pdf'
     } 
 }
-	stage('Howard - Inhomogeneous Multi Beam'){ steps{
-		sh 'rm -rf test/datafiles; julia --project=. test/Inhomogeneous_FFI_MF_MULTI_Howard.jl'
+	stage('Howard - Homogeneous Multi Beam'){ steps{
+		sh 'rm -rf test/datafiles; julia --project=. test/Homogeneous_FFI_MF_MULTI_Howard.jl'
 		archiveArtifacts artifacts: '*.pdf'
     } 
 }
