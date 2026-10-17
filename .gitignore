@@ -1,6 +1,7 @@
 exp
 .DS_Store
 *.pdf
+*.dat
 *.gif
 
 # Julia generated artifacts
